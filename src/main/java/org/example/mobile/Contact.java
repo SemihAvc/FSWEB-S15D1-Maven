@@ -1,35 +1,38 @@
 package org.example.mobile;
 
+import java.util.Objects;
+
 public class Contact {
+    private String name;
     private String phoneNumber;
-    private  String name;
 
-    public Contact(String phoneNumber, String name) {
-        this.phoneNumber = phoneNumber;
+    public Contact(String name, String phoneNumber) {
         this.name = name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public static Contact createContact(String name,String phoneNumber){
+        return new Contact(name,phoneNumber);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     @Override
-    public String toString() {
-        return "Contact{" +
-                "phoneNumber='" + phoneNumber + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Contact contact = (Contact) object;
+        return Objects.equals(name, contact.name) && Objects.equals(phoneNumber, contact.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phoneNumber);
     }
 }
