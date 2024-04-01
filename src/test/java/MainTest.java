@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(ResultAnalyzer.class)
 public class MainTest {
@@ -71,12 +72,12 @@ public class MainTest {
 
         Grocery.removeItems("cherry");
         assertEquals(Grocery.groceryList.size(), 3);
-        assertEquals(Grocery.groceryList.contains("cherry"), false);
+        assertFalse(Grocery.groceryList.contains("cherry"));
 
         Grocery.removeItems("lemon,banana");
         assertEquals(Grocery.groceryList.size(), 1);
-        assertEquals(Grocery.groceryList.contains("lemon"), false);
-        assertEquals(Grocery.groceryList.contains("banana"), false);
+        assertFalse(Grocery.groceryList.contains("lemon"));
+        assertFalse(Grocery.groceryList.contains("banana"));
     }
 
 
@@ -115,7 +116,7 @@ public class MainTest {
     public void testCreateNewContact()  {
         mobilePhone.addNewContact(new Contact("Test", "12345678"));
         assertEquals(mobilePhone.getMyContacts().size(),4);
-        assertEquals(mobilePhone.getMyContacts().get(3).getName(), "Test");
+        assertEquals(mobilePhone.getMyContacts().get(3).getType(), "Test");
     }
 
     @DisplayName("updateNewContact methodu doğru çalışıyor mu?")
@@ -145,7 +146,7 @@ public class MainTest {
         Contact contact = new Contact("Test", "12345678");
         mobilePhone.addNewContact(new Contact("Test", "12345678"));
 
-        assertEquals(mobilePhone.findContact(contact), 3);
+        assertEquals(mobilePhone.findContact(String.valueOf(contact)), 3);
     }
 
     @DisplayName("findContact(String) methodu doğru çalışıyor mu?")
